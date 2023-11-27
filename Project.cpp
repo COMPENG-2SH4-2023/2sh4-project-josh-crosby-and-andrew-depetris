@@ -3,6 +3,7 @@
 #include "objPos.h"
 #include "GameMechs.h"
 #include "Player.h"
+#include "food.h"
 
 using namespace std;
 GameMechs *myGM;
@@ -58,6 +59,7 @@ void GetInput(void)
     myPlayer->updatePlayerDir();
     myPlayer->movePlayer();
     myGM->clearInput();
+
 }
 
 void RunLogic(void)
@@ -76,7 +78,7 @@ void RunLogic(void)
             {
                 gameboard[i][j] = 35;
 
-            }else if(temp.x == j && temp.y == i)
+            }else if(temp.y == i && temp.x == j)
             {
                 gameboard[i][j] = temp.symbol;   
             }else
@@ -96,8 +98,7 @@ void DrawScreen(void)
         {
             MacUILib_printf("%c",gameboard[i][j]);
         }
-        MacUILib_printf("\n");
-
+        MacUILib_printf("\n");//change line
     }
 
 }
