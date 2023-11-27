@@ -50,6 +50,7 @@ void Initialize(void)
     {
         gameboard[i] = new char[x];
     }
+
 }
 
 void GetInput(void)
@@ -59,17 +60,18 @@ void GetInput(void)
 
 void RunLogic(void)
 {
-    int x = myGM->getBoardSizeX();
-    int y = myGM->getBoardSizeY();
-    for(int i = 0;i<=x;i++)
+    const int x = myGM->getBoardSizeX();
+    const int y = myGM->getBoardSizeY();
+    for(int i = 0;i<y;i++)
     {
-        for(int j = 0;j<=y;j++)
+        for(int j = 0;j<x;j++)
         {
-            if(i == 0 || i == x || j == 0 || j == y)
+            if(i == 0 || j == (x-1) || j == 0 || i == (y-1))
             {
-                gameboard[i][j] = '#';
+                gameboard[i][j] = 35;
+
             }else{
-                gameboard[i][j] = ' ';
+                gameboard[i][j] = 32;
             }
         }
     }
@@ -78,14 +80,15 @@ void RunLogic(void)
 void DrawScreen(void)
 {
     MacUILib_clearScreen(); 
-    MacUILib_printf("%c",gameboard[0][0]);
-    // for(int i =0;i <= myGM->getBoardSizeX();i++)
-    // {
-    //     for(int j=0;j<=myGM->getBoardSizeY();j++)
-    //     {
-    //         MacUILib_printf("%c",gameboard[i][j]);
-    //     }
-    // }
+    for(int i =0;i < myGM->getBoardSizeY();i++)
+    {
+        for(int j=0;j<myGM->getBoardSizeX();j++)
+        {
+            MacUILib_printf("%c",gameboard[i][j]);
+        }
+        MacUILib_printf("\n");
+
+    }
 
 }
 
@@ -98,6 +101,6 @@ void LoopDelay(void)
 
 void CleanUp(void)
 {
-    MacUILib_clearScreen();    
+    MacUILib_clearScreen();  
     MacUILib_uninit();
 }
