@@ -55,7 +55,10 @@ void Initialize(void)
 
 void GetInput(void)
 {
-   
+   myPlayer->updatePlayerDir();
+   myPlayer->movePlayer();
+
+    myGM->clearInput();
 }
 
 void RunLogic(void)
@@ -93,8 +96,11 @@ void DrawScreen(void)
         {
             MacUILib_printf("%c",gameboard[i][j]);// prints all the table values
         }
+
         MacUILib_printf("\n");//change line
 
+
+        MacUILib_printf("\n");
     }
 
 }
@@ -110,4 +116,13 @@ void CleanUp(void)
 {
     MacUILib_clearScreen();  
     MacUILib_uninit();
+    for(int i = 0; i < myGM->getBoardSizeY(); i++)
+    {   
+        delete(gameboard[i]);
+    }  
+    delete gameboard;
+    delete myGM;
+    delete myPlayer;
+
+    
 }

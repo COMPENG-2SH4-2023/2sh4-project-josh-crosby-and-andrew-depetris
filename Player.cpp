@@ -7,6 +7,8 @@ Player::Player(GameMechs* thisGMRef)
     myDir = STOP;
 
     // more actions to be included
+
+    playerPos.setObjPos(mainGameMechsRef->getBoardSizeX() / 2,mainGameMechsRef->getBoardSizeY() / 2 ,'@');
     playerPos.setObjPos(5,10,'@');
 
 }
@@ -27,8 +29,6 @@ void Player::getPlayerPos(objPos &returnPos)
 void Player::updatePlayerDir()
 {
     // PPA3 input processing logic  
-
-    // need to fix input
 
     char input = mainGameMechsRef->getInput();
 
