@@ -58,7 +58,8 @@ void GetInput(void)
    myPlayer->updatePlayerDir();
    myPlayer->movePlayer();
 
-    myGM->clearInput();
+   myGM->clearInput();
+    
 }
 
 void RunLogic(void)
@@ -77,7 +78,7 @@ void RunLogic(void)
             {
                 gameboard[i][j] = 35;
 
-            }else if(temp.x == i && temp.y == j)
+            }else if(temp.y == i && temp.x == j)
             {
                 gameboard[i][j] = temp.symbol;   
             }else{
@@ -98,9 +99,6 @@ void DrawScreen(void)
         }
 
         MacUILib_printf("\n");//change line
-
-
-        MacUILib_printf("\n");
     }
 
 }
