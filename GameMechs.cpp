@@ -3,7 +3,7 @@
 
 GameMechs::GameMechs()
 {
-    input = NULL;
+    input = 0;
     exitFlag = false;
     score = 0;
     loseFlag = 0;
@@ -13,7 +13,7 @@ GameMechs::GameMechs()
 
 GameMechs::GameMechs(int boardX, int boardY)
 {
-    input = NULL;
+    input = 0;
     exitFlag = false;
     score = 0;
     loseFlag = 0;
@@ -35,6 +35,8 @@ char GameMechs::getInput()
     if (MacUILib_hasChar())
     {       
         input = MacUILib_getChar();
+        if(input == 27)
+            exitFlag = true;
     }
     return input;
 }
@@ -62,7 +64,7 @@ void GameMechs::setInput(char this_input)
 
 void GameMechs::clearInput()
 {
-    input = NULL;
+    input = 0;
 }
 
 int GameMechs::getScore()
