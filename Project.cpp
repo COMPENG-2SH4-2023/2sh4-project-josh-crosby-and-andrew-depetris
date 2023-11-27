@@ -45,10 +45,10 @@ void Initialize(void)
     myPlayer = new Player(myGM);
     int x = myGM->getBoardSizeX();
     int y = myGM->getBoardSizeY();
-    gameboard = new char*[x];
-    for(int i =0;i<x;i++)
+    gameboard = new char*[y];
+    for(int i =0;i<y;i++)
     {
-        gameboard[i] = new char[y];
+        gameboard[i] = new char[x];
     }
 }
 
