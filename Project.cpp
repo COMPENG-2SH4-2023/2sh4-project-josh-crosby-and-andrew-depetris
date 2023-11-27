@@ -60,16 +60,23 @@ void GetInput(void)
 
 void RunLogic(void)
 {
-    const int x = myGM->getBoardSizeX();
-    const int y = myGM->getBoardSizeY();
+    int x = myGM->getBoardSizeX();
+    int y = myGM->getBoardSizeY();
+    objPos temp;
+    myPlayer->getPlayerPos(temp);
+    
     for(int i = 0;i<y;i++)
     {
         for(int j = 0;j<x;j++)
         {
+            
             if(i == 0 || j == (x-1) || j == 0 || i == (y-1))
             {
                 gameboard[i][j] = 35;
 
+            }else if(temp.x == i && temp.y == j)
+            {
+                gameboard[i][j] = temp.symbol;   
             }else{
                 gameboard[i][j] = 32;
             }
