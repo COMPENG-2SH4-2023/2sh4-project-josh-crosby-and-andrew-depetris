@@ -1,11 +1,11 @@
 #include "MacUILib.h"
-
+#include <unistd.h>
 print_ptr MacUILib_printf;
 
 #ifdef WINDOWS
 
 	#include <conio.h>
-	
+
 	void MacUILib_init(void)
 	{
 		MacUILib_printf = &printf;
@@ -49,8 +49,8 @@ print_ptr MacUILib_printf;
 	
 #ifdef POSIX
 
-	#include <ncurses.h>
-	#include <unistd.h>
+	include <ncurses.h>
+	include <unistd.h>
 	
 	void MacUILib_init(void)
 	{
