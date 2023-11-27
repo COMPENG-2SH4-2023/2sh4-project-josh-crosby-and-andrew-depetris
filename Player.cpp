@@ -59,17 +59,17 @@ void Player::updatePlayerDir()
 void Player::movePlayer()
 {
     // PPA3 Finite State Machine logic
-    switch (playerdirection)
+    switch (myDir)
     {
     case UP:
-        if(player.y == 1){
-            player.y = SIZEY-2;
+        if(playerPos.y == 1){
+            playerPos.y = -2;
         }else{
-            player.y--;
+            playerPos.y--;
         }
         break;
     case DOWN:
-        if(player.y == SIZEY-2){
+        if(playerPos.y == SIZEY-2){
             player.y = 1;
         }else{
             player.y++;
