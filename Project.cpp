@@ -55,9 +55,8 @@ void Initialize(void)
 
 void GetInput(void)
 {
-   myPlayer->updatePlayerDir();
-   myPlayer->movePlayer();
-
+    myPlayer->updatePlayerDir();
+    myPlayer->movePlayer();
     myGM->clearInput();
 }
 
@@ -77,10 +76,11 @@ void RunLogic(void)
             {
                 gameboard[i][j] = 35;
 
-            }else if(temp.x == i && temp.y == j)
+            }else if(temp.x == j && temp.y == i)
             {
                 gameboard[i][j] = temp.symbol;   
-            }else{
+            }else
+            {
                 gameboard[i][j] = 32;
             }
         }
@@ -94,13 +94,10 @@ void DrawScreen(void)
     {
         for(int j=0;j<myGM->getBoardSizeX();j++)
         {
-            MacUILib_printf("%c",gameboard[i][j]);// prints all the table values
+            MacUILib_printf("%c",gameboard[i][j]);
         }
-
-        MacUILib_printf("\n");//change line
-
-
         MacUILib_printf("\n");
+
     }
 
 }
@@ -116,13 +113,4 @@ void CleanUp(void)
 {
     MacUILib_clearScreen();  
     MacUILib_uninit();
-    for(int i = 0; i < myGM->getBoardSizeY(); i++)
-    {   
-        delete(gameboard[i]);
-    }  
-    delete gameboard;
-    delete myGM;
-    delete myPlayer;
-
-    
 }
