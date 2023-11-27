@@ -7,7 +7,9 @@ Player::Player(GameMechs* thisGMRef)
     myDir = STOP;
 
     // more actions to be included
-    playerPos.setObjPos(mainGameMechsRef->getBoardSizeY() / 2,mainGameMechsRef->getBoardSizeX() / 2,'@');
+
+    playerPos.setObjPos(mainGameMechsRef->getBoardSizeX() / 2,mainGameMechsRef->getBoardSizeY() / 2 ,'@');
+    playerPos.setObjPos(5,10,'@');
 
 }
 

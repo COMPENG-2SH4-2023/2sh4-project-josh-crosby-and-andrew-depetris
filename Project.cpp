@@ -94,8 +94,12 @@ void DrawScreen(void)
     {
         for(int j=0;j<myGM->getBoardSizeX();j++)
         {
-            MacUILib_printf("%c",gameboard[i][j]);
+            MacUILib_printf("%c",gameboard[i][j]);// prints all the table values
         }
+
+        MacUILib_printf("\n");//change line
+
+
         MacUILib_printf("\n");
     }
 
