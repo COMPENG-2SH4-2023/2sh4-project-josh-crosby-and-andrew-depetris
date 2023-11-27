@@ -51,13 +51,26 @@ void GetInput(void)
 
 void RunLogic(void)
 {
-    
+    int x = myGM->getBoardSizeX();
+    int y = myGM->getBoardSizeY();
+    char gameboard[x][y] = {};
+    for(int i = 0;i<=x;i++)
+    {
+        for(int j = 0;j<=y;j++)
+        {
+            if(i == 0 || i == x || j == 0 || j == y)
+            {
+                gameboard[x][]
+            }
+        }
+    }
 }
 
 void DrawScreen(void)
 {
     MacUILib_clearScreen(); 
-    MacUILib_printf("%d",myGM->getBoardSizeX());
+    
+
 }
 
 void LoopDelay(void)
