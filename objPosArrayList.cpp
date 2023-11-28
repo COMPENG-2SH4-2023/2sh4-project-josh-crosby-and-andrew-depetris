@@ -39,6 +39,11 @@ void objPosArrayList::insertHead(objPos thisPos)
 
 void objPosArrayList::insertTail(objPos thisPos)
 {
+    if(sizeList == sizeArray)
+    {
+        return;
+    }
+    
     aList[sizeList++].setObjPos(thisPos);
 }
 

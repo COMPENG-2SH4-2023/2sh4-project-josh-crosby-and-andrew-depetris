@@ -66,14 +66,31 @@ void RunLogic(void)
 {
     int x = myGM->getBoardSizeX();
     int y = myGM->getBoardSizeY();
-    objPos temp;
-    myPlayer->getPlayerPos(temp);
+    objPos tempBody;
+    objPosArrayList* playerBody = myPlayer->getPlayerPos();
+    bool playerElement;
     
     for(int i = 0;i<y;i++)
     {
         for(int j = 0;j<x;j++)
         {
-            
+            playerElement = false;
+            for(int k = 0; k < playerBody->getSize())
+            {
+                playerBody->getElement(tempBody,i);
+                if(tempBody.x == j && tempBody.y == i)
+                {
+                    MacUILib_printf("%c", tempBody.getSymbol);
+                    playerElement = true;
+                    break;
+                }
+
+            if(playerElement == true)
+            {
+                continue;
+            }
+                
+            }
             if(i == 0 || j == (x-1) || j == 0 || i == (y-1))
             {
                 gameboard[i][j] = 35;
