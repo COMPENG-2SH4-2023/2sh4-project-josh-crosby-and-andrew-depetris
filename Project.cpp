@@ -3,10 +3,12 @@
 #include "objPos.h"
 #include "GameMechs.h"
 #include "Player.h"
+#include "Food.h"
 
 using namespace std;
 GameMechs *myGM;
 Player* myPlayer;
+Food* myFood;
 #define DELAY_CONST 100000
 char **gameboard;
 
@@ -43,8 +45,12 @@ void Initialize(void)
     MacUILib_clearScreen();
     myGM = new GameMechs();
     myPlayer = new Player(myGM);
+    myFood = new Food();
     int x = myGM->getBoardSizeX();
     int y = myGM->getBoardSizeY();
+    objPos blockOff;
+    myPlayer->getPlayerPos(blockOff);
+    myFood->generateFood(blockOff,x,y);
     gameboard = new char*[y];
     for(int i =0;i<y;i++)
     {
@@ -55,11 +61,10 @@ void Initialize(void)
 
 void GetInput(void)
 {
-   myPlayer->updatePlayerDir();
-   myPlayer->movePlayer();
+    myPlayer->updatePlayerDir();
+    myPlayer->movePlayer();
+    myGM->clearInput();
 
-   myGM->clearInput();
-    
 }
 
 void RunLogic(void)
@@ -70,6 +75,16 @@ void RunLogic(void)
     objPosArrayList* playerBody = myPlayer->getPlayerPos();
     bool playerElement;
     
+    objPos temp;
+    myPlayer->getPlayerPos(temp);
+    objPos foody;
+    myFood->getFoodPos(foody);
+    if(temp.x == foody.x && temp.y == foody.y)
+    {
+        myFood->generateFood(temp,x,y);
+        myFood->getFoodPos(foody);
+        myGM->incrementScore();
+    }
     for(int i = 0;i<y;i++)
     {
         for(int j = 0;j<x;j++)
@@ -98,7 +113,11 @@ void RunLogic(void)
             }else if(temp.y == i && temp.x == j)
             {
                 gameboard[i][j] = temp.symbol;   
-            }else{
+            }else if(foody.y == i && foody.x == j)
+            {
+                gameboard[i][j] = foody.symbol;
+            }else
+            {
                 gameboard[i][j] = 32;
             }
         }
@@ -112,11 +131,11 @@ void DrawScreen(void)
     {
         for(int j=0;j<myGM->getBoardSizeX();j++)
         {
-            MacUILib_printf("%c",gameboard[i][j]);// prints all the table values
+            MacUILib_printf("%c",gameboard[i][j]);
         }
-
         MacUILib_printf("\n");//change line
     }
+    MacUILib_printf("Score: %d",myGM->getScore());
 
 }
 
@@ -131,13 +150,4 @@ void CleanUp(void)
 {
     MacUILib_clearScreen();  
     MacUILib_uninit();
-    for(int i = 0; i < myGM->getBoardSizeY(); i++)
-    {   
-        delete(gameboard[i]);
-    }  
-    delete gameboard;
-    delete myGM;
-    delete myPlayer;
-
-    
 }
