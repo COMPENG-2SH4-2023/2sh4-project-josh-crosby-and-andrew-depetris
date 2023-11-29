@@ -77,7 +77,7 @@ void RunLogic(void)
     objPos temp;
     playerBody->getHeadElement(temp);
     objPos foody;
-    
+    myFood->getFoodPos(foody);
     int size = playerBody->getSize();
     for(int i = 1; i< size;i++)
     {
@@ -113,7 +113,7 @@ void RunLogic(void)
                     break;
                 }
             }
-            if(playerElement)
+            if(playerElement == true)
             {
                 continue;
             }
