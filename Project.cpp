@@ -9,7 +9,7 @@
 using namespace std;
 GameMechs *myGM;
 Player* myPlayer;
-Food* myFood;
+// Food* myFood;
 #define DELAY_CONST 100000
 char **gameboard;
 
@@ -46,12 +46,12 @@ void Initialize(void)
     MacUILib_clearScreen();
     myGM = new GameMechs();
     myPlayer = new Player(myGM);
-    myFood = new Food();
+    // myFood = new Food();
     int x = myGM->getBoardSizeX();
     int y = myGM->getBoardSizeY();
     objPos blockOff;
     // myPlayer->getPlayerPos(blockOff);
-    myFood->generateFood(blockOff,x,y);
+    // myFood->generateFood(blockOff,x,y);
     gameboard = new char*[y];
     for(int i =0;i<y;i++)
     {
@@ -78,7 +78,7 @@ void RunLogic(void)
 
 
     objPos foody;
-    myFood->getFoodPos(foody);
+    // myFood->getFoodPos(foody);
     // if(tempBody.x == foody.x && tempBody.y == foody.y)
     // {
     //     myFood->generateFood(temp,x,y);
@@ -95,12 +95,12 @@ void RunLogic(void)
                 playerBody->getElement(tempBody,i);
                 if(tempBody.x == j && tempBody.y == i)
                 {
-                    MacUILib_printf("%c", tempBody.symbol);
+                    gameboard[i][j] = tempBody.symbol;
                     playerElement = true;
                     break;
                 }
             }
-            if(playerElement == true)
+            if(playerElement)
             {
                 continue;
             }
