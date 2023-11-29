@@ -11,7 +11,6 @@ Player* myPlayer;
 Food* myFood;
 #define DELAY_CONST 100000
 char **gameboard;
-
 void Initialize(void);
 void GetInput(void);
 void RunLogic(void);
@@ -46,11 +45,10 @@ void Initialize(void)
     myGM = new GameMechs();
     myPlayer = new Player(myGM);
     myFood = new Food();
+    objPosArrayList* playerBody = myPlayer->getPlayerPos();
     int x = myGM->getBoardSizeX();
     int y = myGM->getBoardSizeY();
-    objPos blockOff;
-    myPlayer->getPlayerPos(blockOff);
-    myFood->generateFood(blockOff,x,y);
+    myFood->generateFood(playerBody,x,y);
     gameboard = new char*[y];
     for(int i =0;i<y;i++)
     {
@@ -74,46 +72,55 @@ void RunLogic(void)
     objPos tempBody;
     objPosArrayList* playerBody = myPlayer->getPlayerPos();
     bool playerElement;
-    
     objPos temp;
-    myPlayer->getPlayerPos(temp);
+    playerBody->getHeadElement(temp);
     objPos foody;
     myFood->getFoodPos(foody);
-    if(temp.x == foody.x && temp.y == foody.y)
+    int size = playerBody->getSize();
+    for(int i = 1; i< size;i++)
     {
-        myFood->generateFood(temp,x,y);
+        objPos colPos;
+        playerBody->getElement(colPos,i);
+        if(temp.x == colPos.x && temp.y == colPos.y)
+        {
+            myGM->setExitTrue();
+        }
+        }
+    if( temp.x == foody.x && temp.y == foody.y)
+    {
+        playerBody->insertTail(temp);
+        myFood->generateFood(playerBody,x,y);
         myFood->getFoodPos(foody);
         myGM->incrementScore();
+
     }
+   
     for(int i = 0;i<y;i++)
     {
         for(int j = 0;j<x;j++)
         {
             playerElement = false;
-            for(int k = 0; k < playerBody->getSize())
+            for(int k = 0; k < playerBody->getSize(); k++)
             {
-                playerBody->getElement(tempBody,i);
+                playerBody->getElement(tempBody,k);
                 if(tempBody.x == j && tempBody.y == i)
-                {
-                    MacUILib_printf("%c", tempBody.getSymbol);
+                {   gameboard[i][j] = tempBody.symbol;
                     playerElement = true;
                     break;
                 }
-
+            }
             if(playerElement == true)
             {
                 continue;
             }
                 
-            }
+            
             if(i == 0 || j == (x-1) || j == 0 || i == (y-1))
             {
                 gameboard[i][j] = 35;
 
-            }else if(temp.y == i && temp.x == j)
-            {
-                gameboard[i][j] = temp.symbol;   
-            }else if(foody.y == i && foody.x == j)
+            }
+            else if(foody.y == i && foody.x == j)
             {
                 gameboard[i][j] = foody.symbol;
             }else
@@ -135,7 +142,7 @@ void DrawScreen(void)
         }
         MacUILib_printf("\n");//change line
     }
-    MacUILib_printf("Score: %d",myGM->getScore());
+    MacUILib_printf("Score: %d\n",myGM->getScore());
 
 }
 

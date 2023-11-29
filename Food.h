@@ -7,7 +7,7 @@ class Food
     public:
         Food();
         ~Food();
-        void generateFood(objPos BlockOff, int xRange,int yRange);
+        void generateFood(objPosArrayList* blockoff, int xRange,int yRange);
         void getFoodPos(objPos &returnPos);
     private:
         objPos foodPos;

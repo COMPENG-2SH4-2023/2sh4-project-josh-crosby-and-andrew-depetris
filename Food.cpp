@@ -9,21 +9,36 @@ Food::~Food()
 {
     
 }
-void Food::generateFood(objPos BlockOff,int xRange,int yRange)
+void Food::generateFood(objPosArrayList* blockoff,int xRange,int yRange)
 {
     bool loop = true;
     while(loop)
     {
         srand(time(NULL));
+        int size = blockoff->getSize();        
         int xcord = (rand()% (xRange-2))+1;
         int ycord = (rand()% (yRange-2))+1;
-        if(xcord != BlockOff.x && ycord != BlockOff.y)
+        int count = 0;
+        for(int i = 0;i<size;i++)
         {
-            foodPos.y = ycord;
+            objPos temp;
+            
+            blockoff->getElement(temp,i);
+            if(xcord != temp.x && ycord != temp.y)
+            {
+                count++;
+            }
+
+        }
+        if(count == size)
+        {
             foodPos.x = xcord;
+            foodPos.y = ycord;
             loop = false;
         }
+        
     }
+
 }
 void Food::getFoodPos(objPos &returnPos)
 {
