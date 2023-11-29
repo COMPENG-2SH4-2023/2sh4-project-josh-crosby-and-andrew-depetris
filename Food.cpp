@@ -32,12 +32,10 @@ void Food::generateFood(objPosArrayList* blockoff,int xRange,int yRange)
             }
 
         }
-        if(count == size)
-        {
-            foodPos.x = xcord;
-            foodPos.y = ycord;
-            loop = false;
-        }
+        foodPos.x = xcord;
+        foodPos.y = ycord;
+        loop = false;
+        
         
     }
 
