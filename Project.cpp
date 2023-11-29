@@ -4,6 +4,7 @@
 #include "GameMechs.h"
 #include "Player.h"
 #include "Food.h"
+#include "objPosArrayList.h"
 
 using namespace std;
 GameMechs *myGM;
@@ -49,6 +50,7 @@ void Initialize(void)
     int x = myGM->getBoardSizeX();
     int y = myGM->getBoardSizeY();
     myFood->generateFood(playerBody,x,y);
+
     gameboard = new char*[y];
     for(int i =0;i<y;i++)
     {
@@ -95,6 +97,7 @@ void RunLogic(void)
 
     }
    
+
     for(int i = 0;i<y;i++)
     {
         for(int j = 0;j<x;j++)
@@ -104,7 +107,8 @@ void RunLogic(void)
             {
                 playerBody->getElement(tempBody,k);
                 if(tempBody.x == j && tempBody.y == i)
-                {   gameboard[i][j] = tempBody.symbol;
+                {   
+                    gameboard[i][j] = tempBody.symbol;
                     playerElement = true;
                     break;
                 }
@@ -156,5 +160,7 @@ void LoopDelay(void)
 void CleanUp(void)
 {
     MacUILib_clearScreen();  
+    delete myFood;
+    delete myGM;
     MacUILib_uninit();
 }

@@ -26,7 +26,9 @@ void Food::generateFood(objPosArrayList* blockoff,int xRange,int yRange)
             blockoff->getElement(temp,i);
             if(xcord != temp.x && ycord != temp.y)
             {
-                count++;
+                continue;
+            }else{
+                break;
             }
 
         }

@@ -11,7 +11,9 @@ Player::Player(GameMechs* thisGMRef)
     playerPosList = new objPosArrayList();
 
     objPos tempPos;
+
     tempPos.setObjPos((mainGameMechsRef->getBoardSizeX() / 2),(mainGameMechsRef->getBoardSizeY() / 2),'0');
+
     playerPosList->insertHead(tempPos);
 
 }
