@@ -4,6 +4,7 @@
 #include "GameMechs.h"
 #include "Player.h"
 #include "Food.h"
+#include "objPosArrayList.h"
 
 using namespace std;
 GameMechs *myGM;
@@ -49,7 +50,7 @@ void Initialize(void)
     int x = myGM->getBoardSizeX();
     int y = myGM->getBoardSizeY();
     objPos blockOff;
-    myPlayer->getPlayerPos(blockOff);
+    // myPlayer->getPlayerPos(blockOff);
     myFood->generateFood(blockOff,x,y);
     gameboard = new char*[y];
     for(int i =0;i<y;i++)
@@ -74,46 +75,43 @@ void RunLogic(void)
     objPos tempBody;
     objPosArrayList* playerBody = myPlayer->getPlayerPos();
     bool playerElement;
-    
-    objPos temp;
-    myPlayer->getPlayerPos(temp);
+
+
     objPos foody;
     myFood->getFoodPos(foody);
-    if(temp.x == foody.x && temp.y == foody.y)
-    {
-        myFood->generateFood(temp,x,y);
-        myFood->getFoodPos(foody);
-        myGM->incrementScore();
-    }
+    // if(tempBody.x == foody.x && tempBody.y == foody.y)
+    // {
+    //     myFood->generateFood(temp,x,y);
+    //     myFood->getFoodPos(foody);
+    //     myGM->incrementScore();
+    // }
     for(int i = 0;i<y;i++)
     {
         for(int j = 0;j<x;j++)
         {
             playerElement = false;
-            for(int k = 0; k < playerBody->getSize())
+            for(int k = 0; k < playerBody->getSize(); k++)
             {
                 playerBody->getElement(tempBody,i);
                 if(tempBody.x == j && tempBody.y == i)
                 {
-                    MacUILib_printf("%c", tempBody.getSymbol);
+                    MacUILib_printf("%c", tempBody.symbol);
                     playerElement = true;
                     break;
                 }
-
+            }
             if(playerElement == true)
             {
                 continue;
             }
                 
-            }
+            
             if(i == 0 || j == (x-1) || j == 0 || i == (y-1))
             {
                 gameboard[i][j] = 35;
 
-            }else if(temp.y == i && temp.x == j)
-            {
-                gameboard[i][j] = temp.symbol;   
-            }else if(foody.y == i && foody.x == j)
+            }
+            else if(foody.y == i && foody.x == j)
             {
                 gameboard[i][j] = foody.symbol;
             }else
