@@ -90,7 +90,9 @@ void RunLogic(void)
         }
     if( temp.x == foody.x && temp.y == foody.y)
     {
+        playerBody->getHeadElement(temp);
         playerBody->insertTail(temp);
+        playerBody = myPlayer->getPlayerPos();
         myFood->generateFood(playerBody,x,y);
         myFood->getFoodPos(foody);
         myGM->incrementScore();

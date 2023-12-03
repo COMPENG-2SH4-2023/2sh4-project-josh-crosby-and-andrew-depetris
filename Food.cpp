@@ -22,21 +22,21 @@ void Food::generateFood(objPosArrayList* blockoff,int xRange,int yRange)
         for(int i = 0;i<size;i++)
         {
             objPos temp;
-            
             blockoff->getElement(temp,i);
             if(xcord != temp.x && ycord != temp.y)
             {
+                count++;
                 continue;
             }else{
                 break;
             }
 
         }
-        foodPos.x = xcord;
-        foodPos.y = ycord;
-        loop = false;
-        
-        
+        if(count == size){
+            foodPos.x = xcord;
+            foodPos.y = ycord;
+            loop = false;
+        }
     }
 
 }
