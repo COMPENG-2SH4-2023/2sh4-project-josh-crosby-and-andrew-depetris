@@ -11,11 +11,12 @@ Food::~Food()
 }
 void Food::generateFood(objPosArrayList* blockoff,int xRange,int yRange)
 {
+    srand(time(NULL));
+    int size = blockoff->getSize();
     bool loop = true;
     while(loop)
     {
-        srand(time(NULL));
-        int size = blockoff->getSize();        
+                
         int xcord = (rand()% (xRange-2))+1;
         int ycord = (rand()% (yRange-2))+1;
         int count = 0;
