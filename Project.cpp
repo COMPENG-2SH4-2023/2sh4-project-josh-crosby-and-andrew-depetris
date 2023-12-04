@@ -161,7 +161,8 @@ void LoopDelay(void)
 
 void CleanUp(void)
 {
-    MacUILib_clearScreen();  
+    MacUILib_clearScreen(); 
+    MacUILib_printf("Your final score was: %d",myGM->getScore());
     delete myFood;
     delete myGM;
     MacUILib_uninit();
